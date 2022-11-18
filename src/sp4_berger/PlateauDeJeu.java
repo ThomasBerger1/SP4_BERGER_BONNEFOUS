@@ -47,9 +47,9 @@ public class PlateauDeJeu {
                 if (grille[i][j].presenceJeton()){
                     String color = grille[i][j].lireCouleurDuJeton();
                     if(color.equals("rouge")){
-                        //j1.ajouterJeton(grille[i][j]);
+                        j1.ajouterJeton(grille[i][j].recupererJeton());
                     }else if(color.equals("jaune")){
-                        //j2.ajouterJeton(grille[i][j]);
+                        j2.ajouterJeton(grille[i][j].recupererJeton());
                     }
                 }
             }
@@ -72,4 +72,44 @@ public class PlateauDeJeu {
             }
         }
     } 
+    
+    public boolean presenceJeton (int x, int y){
+        return grille[x][y].presenceJeton();
+    }
+    
+    public String lireCouleurDuJeton (int x, int y){
+        return grille[x][y].lireCouleurDuJeton();
+    }
+    
+    public boolean etreGagnantePourCouleur(String aa){
+        
+        public boolean ligneGagnantePourCouleur(String aaa){
+            for 
+        } 
+        
+        public boolean colonneGagnantePourCouleur(String aaa){
+            
+        } 
+        
+        public boolean diagonaleMontanteGagnantePourCouleur(String aaa){
+            
+        } 
+        
+        public boolean diagonaleDescendanteGagnantePourCouleur(String aaa){
+            
+        } 
+        
+        if (ligneGagnantePourCouleur(aa)){
+            return true;
+        }else if (colonneGagnantePourCouleur(aa)){
+            return true;
+        }else if (diagonaleMontanteGagnantePourCouleur(aa)){
+            return true;
+        }else if (diagonaleDescendanteGagnantePourCouleur(aa)){
+            return true;
+        }else{
+        return false;
+        }
+    }
+    
 }   
