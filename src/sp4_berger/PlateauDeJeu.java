@@ -15,14 +15,14 @@ public class PlateauDeJeu {
     
     public PlateauDeJeu() {
         for (int i = 0; i < ligne; i++){
-            for (int j = 0; i < coln; j++){  
+            for (int j = 0; j < coln; j++){  
                 grille[i][j] = new CelluleDeGrille();
             }
         }
     }
     
     public int ajouterJetonDansColonne(Jeton j, int c){
-        for (int l = ligne; l > 0; l--){
+        for (int l = 0; l < ligne; l++){
             if (grille[l][c].presenceJeton()==false){
                 return l;
             }
@@ -32,7 +32,7 @@ public class PlateauDeJeu {
     
     public boolean grilleRemplie(){
         for (int i = 0; i < ligne; i++){
-            for (int j = 0; i < coln; j++){ 
+            for (int j = 0; j < coln; j++){ 
                 if (grille[i][j].presenceJeton()){
                     return false;
                 }
@@ -43,16 +43,33 @@ public class PlateauDeJeu {
     
     public void viderGrille(Joueur j1, Joueur j2){
         for (int i = 0; i < ligne; i++){
-            for (int j = 0; i < coln; j++){ 
+            for (int j = 0; j < coln; j++){ 
                 if (grille[i][j].presenceJeton()){
                     String color = grille[i][j].lireCouleurDuJeton();
                     if(color.equals("rouge")){
-                        j1.ajouterJeton(grille[i][j]);
+                        //j1.ajouterJeton(grille[i][j]);
                     }else if(color.equals("jaune")){
-                        j2.ajouterJeton(grille[i][j]);
+                        //j2.ajouterJeton(grille[i][j]);
                     }
                 }
             }
         }
     }
+    
+    public void afficherGrilleSurConsole(){
+        for (int i = 0; i < ligne; i++){
+            for (int j = 0; j < coln; j++){ 
+                
+                if (grille[i][j].presenceJeton()){
+                    System.out.print("["+grille[i][j].lireCouleurDuJeton()+"]");
+                }else{
+                    System.out.print("["+null+"]");
+                }
+                
+                if(j==coln-1){
+                    System.out.print("\n");
+                }
+            }
+        }
+    } 
 }   
