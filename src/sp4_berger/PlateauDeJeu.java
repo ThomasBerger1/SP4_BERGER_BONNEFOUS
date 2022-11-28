@@ -24,6 +24,7 @@ public class PlateauDeJeu {
     public int ajouterJetonDansColonne(Jeton j, int c){
         for (int l = 0; l < ligne; l++){
             if (grille[l][c].presenceJeton()==false){
+                grille[l][c].affecterJeton(j);
                 return l;
             }
         }
@@ -83,7 +84,29 @@ public class PlateauDeJeu {
     
     
     public boolean ligneGagnantePourCouleur(String color){
-            for (int i = 0; i < 4; i++){
+            for (int i = 0; i < 6; i++){
+                for (int j = 0; j < 4; j++){
+                    
+                    if (presenceJeton(i,j)){
+                        if (grille[i][j].lireCouleurDuJeton().equals(color)){
+                            int cmpt = 1;
+                            for (int k = 1; k < 4; k++){
+                                if (grille[i][j+k].lireCouleurDuJeton().equals(color)){
+                                    cmpt ++;
+                                }
+                            }
+                            if (cmpt == 4){
+                                return true;
+                            }
+                    }
+                }
+            }   
+        }
+        return false;
+    } 
+
+    public boolean colonneGagnantePourCouleur(String color){
+            for (int i = 0; i < 3; i++){
                 for (int j = 0; j < 6; j++){
                     
                     if (presenceJeton(i,j)){
@@ -104,31 +127,9 @@ public class PlateauDeJeu {
         return false;
     } 
 
-    public boolean colonneGagnantePourCouleur(String color){
-            for (int i = 0; i < 7; i++){
-                for (int j = 0; j < 3; j++){
-                    
-                    if (presenceJeton(i,j)){
-                        if (grille[i][j].lireCouleurDuJeton().equals(color)){
-                            int cmpt = 1;
-                            for (int k = 1; k < 4; k++){
-                                if (grille[i][j+k].lireCouleurDuJeton().equals(color)){
-                                    cmpt ++;
-                                }
-                            }
-                            if (cmpt == 4){
-                                return true;
-                            }
-                    }
-                }
-            }   
-        }
-        return false;
-    } 
-
     public boolean diagonaleMontanteGagnantePourCouleur(String color){
-        for (int i = 0; i < 4; i++){
-                for (int j = 0; j < 3; j++){
+        for (int i = 0; i < 3; i++){
+                for (int j = 0; j < 4; j++){
                     
                     if (presenceJeton(i,j)){
                         if (grille[i][j].lireCouleurDuJeton().equals(color)){
@@ -149,8 +150,8 @@ public class PlateauDeJeu {
     } 
 
     public boolean diagonaleDescendanteGagnantePourCouleur(String color){
-            for (int i = 0; i < 4; i++){
-                for (int j = 3; j < 6; j++){
+            for (int i = 3; i < 6; i++){
+                for (int j = 0; j < 4; j++){
                     
                     if (presenceJeton(i,j)){
                         if (grille[i][j].lireCouleurDuJeton().equals(color)){
@@ -182,7 +183,7 @@ public class PlateauDeJeu {
     }
     
     public boolean colonneremplie(int colonne){
-        return grille[6][colonne].presenceJeton();
+        return grille[5][colonne].presenceJeton();
     }
 }   
     

@@ -73,7 +73,7 @@ public class Partie {
             choice = choix();
             switch(choice){
                 case 1 :
-                    JoueurCourant.jouerJeton();
+                    jouerJeton();
                     break;
                 /*case 2 :
                     recupJeton();
@@ -85,12 +85,12 @@ public class Partie {
             nbrCoup ++;
             
             if (Plateau.etreGagnantePourCouleur(listeJoueurs[0].Couleur)){
-                System.out.println("Le joueur "+listeJoueurs[0]+" a gagné !!!");
+                System.out.println("Le joueur "+listeJoueurs[0].Nom+" a gagné !!!");
                 break;
             }
             
             if (Plateau.etreGagnantePourCouleur(listeJoueurs[1].Couleur)){
-                System.out.println("Le joueur "+listeJoueurs[1]+" a gagné !!!");
+                System.out.println("Le joueur "+listeJoueurs[1].Nom+" a gagné !!!");
                 break;
             }
             
@@ -108,6 +108,24 @@ public class Partie {
         System.out.println(qst);
         int rep = sc.nextInt();
         return rep;
+    }
+    
+    public void jouerJeton(){
+        
+        int colonne = -1;
+        int lignejeton;
+        if(JoueurCourant.getReserveJetons() > 0){ //dans le cas ou l'on veut et peut placer un pion
+
+            while(colonne < 0 | colonne > 6){
+                colonne = asknbr("Colonne du jeton : (De 0 à 6)");
+            }
+
+            if (!Plateau.colonneremplie(colonne)){
+
+                lignejeton = Plateau.ajouterJetonDansColonne(JoueurCourant.jouerJeton(), colonne);
+            }
+            
+        }
     }
     
     /**public void recupererjeton(){
