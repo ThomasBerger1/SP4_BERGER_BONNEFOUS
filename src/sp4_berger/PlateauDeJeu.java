@@ -11,7 +11,7 @@ package sp4_berger;
 public class PlateauDeJeu {
     private final int ligne = 6;
     private final int coln = 7; 
-    private CelluleDeGrille[][] grille = new CelluleDeGrille[ligne][coln];    
+    private final CelluleDeGrille[][] grille = new CelluleDeGrille[ligne][coln];    
     
     public PlateauDeJeu() {
         for (int i = 0; i < ligne; i++){
@@ -181,6 +181,8 @@ public class PlateauDeJeu {
         }else return diagonaleDescendanteGagnantePourCouleur(couleur);
     }
     
-    
+    public boolean colonneremplie(int colonne){
+        return grille[6][colonne].presenceJeton();
+    }
 }   
     

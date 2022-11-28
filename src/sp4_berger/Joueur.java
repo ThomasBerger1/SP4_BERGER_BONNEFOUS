@@ -23,6 +23,11 @@ public class Joueur {
     public void affecterCouleur(String UneCouleur){
         Couleur= UneCouleur;
     }
+
+    public int getReserveJetons() {
+        return reserveJetons.size();
+    }
+    
     
     public void ajouterJeton(Jeton UnJeton) {
         reserveJetons.add(UnJeton);
