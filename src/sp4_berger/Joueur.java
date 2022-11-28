@@ -11,25 +11,34 @@ import java.util.ArrayList;
  * @author alizeebonnefous
  */
 public class Joueur {
-    
+
     String Nom;
     String Couleur;
-    ArrayList <Jeton> reserveJetons= new ArrayList <> ();
+    ArrayList<Jeton> reserveJetons = new ArrayList<>();
 
     public Joueur(String unNom) {
         Nom = unNom;
-    }   
-    
-    public void affecterCouleur(String UneCouleur){
-        Couleur= UneCouleur;
+    }
+
+    public void affecterCouleur(String UneCouleur) {
+        Couleur = UneCouleur;
     }
 
     public int getReserveJetons() {
         return reserveJetons.size();
     }
-    
-    
+
     public void ajouterJeton(Jeton UnJeton) {
         reserveJetons.add(UnJeton);
+    }
+
+    public Jeton jouerJeton() {
+        Jeton jetonTampon;
+        if (reserveJetons.size() > 0) {
+            jetonTampon = reserveJetons.get(0);
+            reserveJetons.remove(0);
+            return jetonTampon;
+        }
+        return null;
     }
 }
