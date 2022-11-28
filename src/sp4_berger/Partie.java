@@ -13,7 +13,7 @@ import java.util.Scanner;
 public class Partie {
     private final Joueur[] listeJoueurs = new Joueur[2];
     private Joueur JoueurCourant;
-    private PlateauDeJeu Plateau;
+    PlateauDeJeu Plateau;
 
     public Partie(Joueur j1, Joueur j2) {
         listeJoueurs[0] = j1;
@@ -36,6 +36,7 @@ public class Partie {
         attribuerCouleurAuxJoueurs();
         creerEtAffecterJeton(listeJoueurs[0]);
         creerEtAffecterJeton(listeJoueurs[1]);
+        Plateau.afficherGrilleSurConsole();
     }
     
     public int choix(){

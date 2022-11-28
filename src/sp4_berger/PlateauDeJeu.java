@@ -57,7 +57,7 @@ public class PlateauDeJeu {
     }
     
     public void afficherGrilleSurConsole(){
-        for (int i = 5; i > -1; i--){
+        for (int i = 0; i < ligne; i++){
             for (int j = 0; j < coln; j++){ 
                 
                 if (grille[i][j].presenceJeton()){
