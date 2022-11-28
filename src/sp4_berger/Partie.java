@@ -13,7 +13,7 @@ import java.util.Scanner;
 public class Partie {
     private final Joueur[] listeJoueurs = new Joueur[2];
     private Joueur JoueurCourant;
-    PlateauDeJeu Plateau;
+    PlateauDeJeu Plateau = new PlateauDeJeu();
 
     public Partie(Joueur j1, Joueur j2) {
         listeJoueurs[0] = j1;
@@ -68,7 +68,7 @@ public class Partie {
             }else{
                 JoueurCourant = listeJoueurs[1];
             }
-            System.out.println("C'est à " + JoueurCourant.Nom + " de jouer");
+            System.out.println("C'est a " + JoueurCourant.Nom + " de jouer");
             
             choice = choix();
             switch(choice){
