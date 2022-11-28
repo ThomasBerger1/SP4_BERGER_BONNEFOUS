@@ -14,9 +14,7 @@ public class Joueur {
     
     String Nom;
     String Couleur;
-    ArrayList <Jeton> reserveJetons= new ArrayList <Jeton> ();
-    
-
+    ArrayList <Jeton> reserveJetons= new ArrayList <> ();
 
     public Joueur(String unNom) {
         Nom = unNom;
@@ -29,10 +27,4 @@ public class Joueur {
     public void ajouterJeton(Jeton UnJeton) {
         reserveJetons.add(UnJeton);
     }
-    
-    
-
-   
-//NombreDeJetons ()
-//return reserveJeton.size
 }
