@@ -34,7 +34,7 @@ public class Joueur {
 
     public Jeton jouerJeton() {
         Jeton jetonTampon;
-        if (reserveJetons.size() > 0) {
+        if (!reserveJetons.isEmpty()) {
             jetonTampon = reserveJetons.get(0);
             reserveJetons.remove(0);
             return jetonTampon;

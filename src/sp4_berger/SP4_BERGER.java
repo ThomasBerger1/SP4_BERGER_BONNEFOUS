@@ -15,6 +15,12 @@ public class SP4_BERGER {
      */
     public static void main(String[] args) {
         
+        Joueur j1 = new Joueur("Thomas");
+        Joueur j2 = new Joueur("Alizée");
+        Partie partie = new Partie(j1,j2);
+        partie.initialiserPartie();
+        partie.lancerPartie();
+        
     }
     
 }

@@ -72,7 +72,7 @@ public class Partie {
             choice = choix();
             switch(choice){
                 case 1 :
-                    jouerJeton();
+                    JoueurCourant.jouerJeton();
                     break;
                 /*case 2 :
                     recupJeton();
@@ -102,11 +102,6 @@ public class Partie {
         System.out.println("--Partie terminée--");
     }
     
-    public void jouerJeton(){
-        //if(JoueurCourant. > 0){
-            
-        //}
-    }
     public int asknbr(String qst){
         Scanner sc = new Scanner(System.in);
         System.out.println(qst);
