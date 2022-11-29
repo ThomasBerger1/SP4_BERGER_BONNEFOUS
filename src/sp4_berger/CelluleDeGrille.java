@@ -10,6 +10,8 @@ package sp4_berger;
  */
 public class CelluleDeGrille {
     private Jeton jetonCourant = null;
+    private boolean avoirTrouNoir = false;
+    private boolean avoirDesintegrateur = false;
 
     public CelluleDeGrille() {       
     }
@@ -30,20 +32,57 @@ public class CelluleDeGrille {
         }
     }
     
+    public void placerTrouNoir(){
+        avoirTrouNoir = true;
+    }
+    
+    public void supprimerTrouNoir(){
+        avoirTrouNoir = false;
+    }
+
+    public boolean presenceTrouNoir() {
+        return avoirTrouNoir;
+    }    
+    
+    public void supprimerJeton(){
+        jetonCourant = null;
+    }
+    
     public Jeton recupererJeton(){
         Jeton j = jetonCourant;
         jetonCourant = null;
         return j;
     }
 
+    public boolean presenceDesintegrateur() {
+        return avoirDesintegrateur;
+    }
+    
+    public void placerDesintegrateur(){
+        avoirDesintegrateur = true;
+    }
+    
+    public void supprimerDesintegrateur(){
+        avoirDesintegrateur = false;
+    }
+    
+    public void activerTrouNoir(){
+        supprimerJeton();
+        supprimerTrouNoir();
+    }
+    
     @Override
     public String toString() {
-        if (jetonCourant.lireCouleur().equals("rouge")){
-            return "R";
-        }else if (jetonCourant.lireCouleur().equals("jaune")){
-            return "J";
+        String msg ="";
+        if (presenceTrouNoir()){
+            msg += "@ ";
         }
-        return null;
+        if (jetonCourant.lireCouleur().equals("rouge")){
+            msg += "R";
+        }else if (jetonCourant.lireCouleur().equals("jaune")){
+            msg += "J";
+        }
+        return msg;
     }
     
     

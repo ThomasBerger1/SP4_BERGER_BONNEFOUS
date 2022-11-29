@@ -182,6 +182,38 @@ public class PlateauDeJeu {
         }else return diagonaleDescendanteGagnantePourCouleur(couleur);
     }
     
+    public void tasserColonne(int c){
+        for (int k = 0; k < 5; k++){
+            if (!grille[k][c].presenceJeton()){
+                if (grille[k+1][c].presenceJeton()){
+                    Jeton je = grille[k+1][c].recupererJeton();
+                    grille[k][c].affecterJeton(je);
+                    grille[k+1][c].supprimerJeton();
+                }
+            }
+        }
+    }
+    
+    public void placerTrouNoir(int x, int y){
+        grille[x][y].placerTrouNoir();
+    }
+    
+    public void supprimerTrouNoir(int x, int y){
+        grille[x][y].supprimerTrouNoir();
+    }
+    
+    public void placerDesintegrateur(int x, int y){
+        grille[x][y].placerDesintegrateur();
+    }
+    
+    public void supprimerJeton(int x, int y){
+        grille[x][y].supprimerJeton();
+    }
+    
+    public Jeton recupererJeton(int x, int y){
+        return grille[x][y].recupererJeton();
+    }
+    
     public boolean colonneremplie(int colonne){
         return grille[5][colonne].presenceJeton();
     }
