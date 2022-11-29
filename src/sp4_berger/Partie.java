@@ -47,7 +47,7 @@ public class Partie {
         System.out.println(""" 
                            Que voulez faire ? : 
                            1 -> Jouer un jeton
-                           2 -> Récupérer un jeton
+                           2 -> Recuperer un jeton
                            """);  
         
         while(c<1 | c>2){ 
@@ -100,7 +100,7 @@ public class Partie {
             }
         }
         
-        System.out.println("--Partie terminée--");
+        System.out.println("--Partie terminee--");
     }
     
     public int asknbr(String qst){

@@ -15,7 +15,8 @@ public class Joueur {
     private final String Nom;
     private String Couleur;
     private final ArrayList<Jeton> reserveJetons = new ArrayList<>();
-
+    private int nombreDesintegrateur = 0;
+    
     public Joueur(String unNom) {
         Nom = unNom;
     }
@@ -38,6 +39,16 @@ public class Joueur {
 
     public void ajouterJeton(Jeton UnJeton) {
         reserveJetons.add(UnJeton);
+    }
+    
+    public void obtenirDesintegrateur(){
+        nombreDesintegrateur ++;
+    }
+    
+    public void utiliserDesintegrateur(){
+        if (nombreDesintegrateur > 0){           
+            nombreDesintegrateur --;
+        }
     }
 
     public Jeton jouerJeton() {
