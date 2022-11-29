@@ -35,5 +35,17 @@ public class CelluleDeGrille {
         jetonCourant = null;
         return j;
     }
+
+    @Override
+    public String toString() {
+        if (jetonCourant.lireCouleur().equals("rouge")){
+            return "R";
+        }else if (jetonCourant.lireCouleur().equals("jaune")){
+            return "J";
+        }
+        return null;
+    }
+    
+    
 }
 

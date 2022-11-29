@@ -27,7 +27,7 @@ public class Partie {
     
     public void creerEtAffecterJeton(Joueur j){
         for (int i = 0; i < 30; i++){
-            Jeton jet = new Jeton(j.Couleur);
+            Jeton jet = new Jeton(j.getCouleur());
             j.ajouterJeton(jet);
         }
     }
@@ -68,7 +68,7 @@ public class Partie {
             }else{
                 JoueurCourant = listeJoueurs[1];
             }
-            System.out.println("C'est a " + JoueurCourant.Nom + " de jouer");
+            System.out.println("C'est a " + JoueurCourant.getNom() + " de jouer");
             
             choice = choix();
             switch(choice){
@@ -84,13 +84,13 @@ public class Partie {
             Plateau.afficherGrilleSurConsole();
             nbrCoup ++;
             
-            if (Plateau.etreGagnantePourCouleur(listeJoueurs[0].Couleur)){
-                System.out.println("Le joueur "+listeJoueurs[0].Nom+" a gagné !!!");
+            if (Plateau.etreGagnantePourCouleur(listeJoueurs[0].getCouleur())){
+                System.out.println("Le joueur "+listeJoueurs[0].getNom()+" a gagné !!!");
                 break;
             }
             
-            if (Plateau.etreGagnantePourCouleur(listeJoueurs[1].Couleur)){
-                System.out.println("Le joueur "+listeJoueurs[1].Nom+" a gagné !!!");
+            if (Plateau.etreGagnantePourCouleur(listeJoueurs[1].getCouleur())){
+                System.out.println("Le joueur "+listeJoueurs[1].getNom()+" a gagné !!!");
                 break;
             }
             
@@ -114,15 +114,15 @@ public class Partie {
         
         int colonne = -1;
         int lignejeton;
-        if(JoueurCourant.getReserveJetons() > 0){ //dans le cas ou l'on veut et peut placer un pion
+        if(JoueurCourant.nombreDeJetons() > 0){ //dans le cas ou l'on veut et peut placer un pion
 
-            while(colonne < 0 | colonne > 6){
-                colonne = asknbr("Colonne du jeton : (De 0 à 6)");
+            while(colonne < 1 | colonne > 7){
+                colonne = asknbr("Colonne du jeton : (De 1 à 7)");
             }
 
-            if (!Plateau.colonneremplie(colonne)){
+            if (!Plateau.colonneremplie(colonne-1)){
 
-                lignejeton = Plateau.ajouterJetonDansColonne(JoueurCourant.jouerJeton(), colonne);
+                lignejeton = Plateau.ajouterJetonDansColonne(JoueurCourant.jouerJeton(), colonne-1);
             }
             
         }

@@ -12,19 +12,27 @@ import java.util.ArrayList;
  */
 public class Joueur {
 
-    String Nom;
-    String Couleur;
-    ArrayList<Jeton> reserveJetons = new ArrayList<>();
+    private final String Nom;
+    private String Couleur;
+    private final ArrayList<Jeton> reserveJetons = new ArrayList<>();
 
     public Joueur(String unNom) {
         Nom = unNom;
+    }
+
+    public String getCouleur() {
+        return Couleur;
+    }
+
+    public String getNom() {
+        return Nom;
     }
 
     public void affecterCouleur(String UneCouleur) {
         Couleur = UneCouleur;
     }
 
-    public int getReserveJetons() {
+    public int nombreDeJetons() {
         return reserveJetons.size();
     }
 
