@@ -187,7 +187,7 @@ public class Partie {
         if(JoueurCourant.nombreDeJetons() > 0){ 
 
             while(colonne < 0 | colonne > 6){
-                colonne = asknbr("Colonne du jeton : (De 1 à 7)") - 1;
+                colonne = asknbr("Colonne du jeton : (De 1 a 7)") - 1;
             }
 
             if (!Plateau.colonneremplie(colonne)){
