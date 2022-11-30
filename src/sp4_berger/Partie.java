@@ -5,6 +5,7 @@
 package sp4_berger;
 
 import java.util.Scanner;
+import java.util.Random;
 
 /**
  *
@@ -32,10 +33,49 @@ public class Partie {
         }
     }
     
+    public void placerTrousNoirsEtDesintegrateur(){
+        int cTr = 0;
+        int cD = 0;
+        int lgn;
+        int col;
+        Random rand = new Random();
+        
+        while(cTr < 3){
+            lgn = rand.nextInt(5);
+            col = rand.nextInt(6);
+            if (!Plateau.presenceTrouNoir(lgn, col)){
+                Plateau.placerTrouNoir(lgn, col);
+                Plateau.placerDesintegrateur(lgn, col);
+                cTr ++;
+                cD ++;
+            }
+        }
+        
+        while(cTr < 5){
+            lgn = rand.nextInt(5);
+            col = rand.nextInt(6);
+            if (!Plateau.presenceTrouNoir(lgn, col)){
+                Plateau.placerTrouNoir(lgn, col);
+                cTr ++;
+            }
+        }
+        
+        while(cD < 5){
+            lgn = rand.nextInt(5);
+            col = rand.nextInt(6);
+            if (!Plateau.presenceTrouNoir(lgn, col) && !Plateau.presenceDesintegrateur(lgn, col)){
+                Plateau.placerDesintegrateur(lgn, col);
+                cD ++;
+            }
+        }
+        
+    }
+    
     public void initialiserPartie(){
         attribuerCouleurAuxJoueurs();
         creerEtAffecterJeton(listeJoueurs[0]);
         creerEtAffecterJeton(listeJoueurs[1]);
+        placerTrousNoirsEtDesintegrateur();
         Plateau.afficherGrilleSurConsole();
     }
     

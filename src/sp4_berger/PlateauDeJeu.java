@@ -78,6 +78,14 @@ public class PlateauDeJeu {
         return grille[x][y].presenceJeton();
     }
     
+    boolean presenceTrouNoir( int x, int y){
+        return grille[x][y].presenceTrouNoir();
+    }
+    
+    public boolean presenceDesintegrateur (int x, int y){
+        return grille[x][y].presenceDesintegrateur();
+    }
+    
     public String lireCouleurDuJeton (int x, int y){
         return grille[x][y].lireCouleurDuJeton();
     }
