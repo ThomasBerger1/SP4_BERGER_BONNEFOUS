@@ -15,11 +15,11 @@ public class SP4_BERGER {
      */
     public static void main(String[] args) {
         
-        Joueur j1 = new Joueur("Thomas");
+        Joueur j1 = new Joueur("Thomas"); //On crée deux joueurs qui jouent au puissance 4
         Joueur j2 = new Joueur("Alizee");
-        Partie partie = new Partie(j1,j2);
-        partie.initialiserPartie();
-        partie.lancerPartie();
+        Partie partie = new Partie(j1,j2); //On crée la partie
+        partie.initialiserPartie();//ON l'intialise
+        partie.lancerPartie();//On la lance !
         
     }
     

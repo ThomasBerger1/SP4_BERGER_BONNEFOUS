@@ -29,7 +29,7 @@ public class Partie {
     
     public void creerEtAffecterJeton(Joueur j){
         for (int i = 0; i < 30; i++){
-            Jeton jet = new Jeton(j.getCouleur());
+            Jeton jet = new Jeton(j.lireCouleur());
             j.ajouterJeton(jet);
         }
     }
@@ -154,12 +154,12 @@ public class Partie {
             Plateau.afficherGrilleSurConsole();
             nbrCoup ++;
             
-            if (Plateau.etreGagnantePourCouleur(jAd.getCouleur())){
+            if (Plateau.etreGagnantePourCouleur(jAd.lireCouleur())){
                 System.out.println("Le joueur "+jAd.getNom()+" a gagne !!!");
                 break;
             }
             
-            if (Plateau.etreGagnantePourCouleur(JoueurCourant.getCouleur())){
+            if (Plateau.etreGagnantePourCouleur(JoueurCourant.lireCouleur())){
                 System.out.println("Le joueur "+JoueurCourant.getNom()+" a gagne !!!");
                 break;
             }
@@ -217,7 +217,7 @@ public class Partie {
         x = asknbr("Ligne du jeton a recuperer: (De 1 a 6)") - 1;
         y = asknbr("Colonne du jeton a recuperer: (De 1 a 7)") - 1;
         
-        if (!Plateau.lireCouleurDuJeton(x, y).equals(JoueurCourant.getCouleur()) || !Plateau.presenceJeton(x, y)){
+        if (!Plateau.lireCouleurDuJeton(x, y).equals(JoueurCourant.lireCouleur()) || !Plateau.presenceJeton(x, y)){
             System.out.println("Erreur, faute de jeu, il n'y a pas un de vos jetons ici! TOUR ANNULE.");
         }else{
             Jeton je = Plateau.recupererJeton(x, y);
@@ -235,7 +235,7 @@ public class Partie {
         x = asknbr("Ligne du jeton a desintegrer : (De 1 a 6)") - 1;
         y = asknbr("Colonne du jeton a desintegrer: (De 1 a 7)") - 1;
         
-        if (Plateau.lireCouleurDuJeton(x, y).equals(JoueurCourant.getCouleur()) || !Plateau.presenceJeton(x, y)){
+        if (Plateau.lireCouleurDuJeton(x, y).equals(JoueurCourant.lireCouleur()) || !Plateau.presenceJeton(x, y)){
             System.out.println("Erreur, faute de jeu, on ne peut desintegrer que des jetons adverses! TOUR ANNULE.");
         }else{
             Plateau.supprimerJeton(x, y);

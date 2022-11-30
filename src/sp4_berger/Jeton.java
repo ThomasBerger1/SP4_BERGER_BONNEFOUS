@@ -8,18 +8,18 @@ package sp4_berger;
  *
  * @author berge
  */
-public class Jeton {
-    private final String couleur;
+public class Jeton { //Classe Jeton
+    private final String couleur; //Attibut principal couleur 
 
     public Jeton(String color) {
         couleur = color;
     }
 
-    public String lireCouleur() {
+    public String lireCouleur() { //On renvoie la couleur associé au jeton
         return couleur;
     }
 
-    @Override
+    @Override //Methode override pour l'affichage lors d'un print
     public String toString() {
         if (couleur.equals("rouge")){
             return "R";
