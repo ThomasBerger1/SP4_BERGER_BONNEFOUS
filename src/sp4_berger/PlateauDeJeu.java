@@ -67,7 +67,7 @@ public class PlateauDeJeu {
                 } else if (grille[i][j].presenceTrouNoir()) {
                     System.out.print("[TrouNoir]");
                 } else if (grille[i][j].presenceDesintegrateur() && !grille[i][j].presenceTrouNoir()) {
-                    System.out.print("[Désintégrateur]");
+                    System.out.print("[Desintegrateur]");
                 } else {
                     System.out.print("[" + null + "]");
                 }
@@ -217,6 +217,10 @@ public class PlateauDeJeu {
     
     public void placerDesintegrateur(int x, int y){
         grille[x][y].placerDesintegrateur();
+    }
+    
+    public void supprimerDesintegrateur(int x, int y){
+        grille[x][y].supprimerDesintegrateur();
     }
     
     public void supprimerJeton(int x, int y){

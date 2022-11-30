@@ -155,12 +155,12 @@ public class Partie {
             nbrCoup ++;
             
             if (Plateau.etreGagnantePourCouleur(jAd.getCouleur())){
-                System.out.println("Le joueur "+jAd.getNom()+" a gagné !!!");
+                System.out.println("Le joueur "+jAd.getNom()+" a gagne !!!");
                 break;
             }
             
             if (Plateau.etreGagnantePourCouleur(JoueurCourant.getCouleur())){
-                System.out.println("Le joueur "+JoueurCourant.getNom()+" a gagné !!!");
+                System.out.println("Le joueur "+JoueurCourant.getNom()+" a gagne !!!");
                 break;
             }
             
@@ -202,6 +202,7 @@ public class Partie {
                 
                 if (Plateau.presenceDesintegrateur(lignejeton, colonne)){
                     JoueurCourant.obtenirDesintegrateur();
+                    Plateau.supprimerDesintegrateur(lignejeton, colonne);
                     System.out.println(JoueurCourant.getNom()+" a recupere un desintegrateur");
                 }
             }
