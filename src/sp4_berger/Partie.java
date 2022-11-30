@@ -14,6 +14,7 @@ import java.util.Random;
 public class Partie {
     private final Joueur[] listeJoueurs = new Joueur[2];
     private Joueur JoueurCourant;
+    private Joueur jAd; //Joueur adverse // Utilisée pour savoir qui gagne, test sur jAd avant le joueurCourant
     PlateauDeJeu Plateau = new PlateauDeJeu();
 
     public Partie(Joueur j1, Joueur j2) {
@@ -79,7 +80,27 @@ public class Partie {
         Plateau.afficherGrilleSurConsole();
     }
     
-    public int choix(){
+    public int choixD(){
+        int c = 0; 
+        Scanner sc;
+        sc = new Scanner(System.in);
+        
+        System.out.println(""" 
+                           Que voulez faire ? : 
+                           1 -> Jouer un jeton
+                           2 -> Recuperer un jeton
+                           3 -> Jouer un desintegrateur
+                           """);  
+        
+        while(c<1 | c>3){ 
+            
+            c = sc.nextInt(); 
+        }
+        
+        return c;
+        }
+    
+    public int choixSD(){
         int c = 0; 
         Scanner sc;
         sc = new Scanner(System.in);
@@ -105,32 +126,41 @@ public class Partie {
         while(true){
             if (nbrCoup % 2 == 0){
                 JoueurCourant = listeJoueurs[0];
+                jAd = listeJoueurs[1];
             }else{
                 JoueurCourant = listeJoueurs[1];
+                jAd = listeJoueurs[0];
             }
             System.out.println("C'est a " + JoueurCourant.getNom() + " de jouer");
             
-            choice = choix();
+            if (JoueurCourant.getNombreDesintegrateur() > 0){
+                choice = choixD();
+            }else{
+                choice = choixSD();
+            }
+            
             switch(choice){
                 case 1 :
                     jouerJeton();
                     break;
-                /*case 2 :
-                    recupJeton();
+                case 2 :
+                    recupererJeton();
                     break;
-                    */
+                case 3 :
+                    jouerDesintegrateur();
+                    break;
             }
             
             Plateau.afficherGrilleSurConsole();
             nbrCoup ++;
             
-            if (Plateau.etreGagnantePourCouleur(listeJoueurs[0].getCouleur())){
-                System.out.println("Le joueur "+listeJoueurs[0].getNom()+" a gagné !!!");
+            if (Plateau.etreGagnantePourCouleur(jAd.getCouleur())){
+                System.out.println("Le joueur "+jAd.getNom()+" a gagné !!!");
                 break;
             }
             
-            if (Plateau.etreGagnantePourCouleur(listeJoueurs[1].getCouleur())){
-                System.out.println("Le joueur "+listeJoueurs[1].getNom()+" a gagné !!!");
+            if (Plateau.etreGagnantePourCouleur(JoueurCourant.getCouleur())){
+                System.out.println("Le joueur "+JoueurCourant.getNom()+" a gagné !!!");
                 break;
             }
             
@@ -154,31 +184,62 @@ public class Partie {
         
         int colonne = -1;
         int lignejeton;
-        if(JoueurCourant.nombreDeJetons() > 0){ //dans le cas ou l'on veut et peut placer un pion
+        if(JoueurCourant.nombreDeJetons() > 0){ 
 
-            while(colonne < 1 | colonne > 7){
-                colonne = asknbr("Colonne du jeton : (De 1 à 7)");
+            while(colonne < 0 | colonne > 6){
+                colonne = asknbr("Colonne du jeton : (De 1 à 7)") - 1;
             }
 
-            if (!Plateau.colonneremplie(colonne-1)){
+            if (!Plateau.colonneremplie(colonne)){
 
-                lignejeton = Plateau.ajouterJetonDansColonne(JoueurCourant.jouerJeton(), colonne-1);
+                lignejeton = Plateau.ajouterJetonDansColonne(JoueurCourant.jouerJeton(), colonne);
+                
+                if (Plateau.presenceTrouNoir(lignejeton, colonne)){
+                    Plateau.supprimerJeton(lignejeton, colonne);
+                    Plateau.supprimerTrouNoir(lignejeton, colonne);
+                    System.out.println("Le jeton joue a ete absorbe par un trou noir !");
+                }
+                
+                if (Plateau.presenceDesintegrateur(lignejeton, colonne)){
+                    JoueurCourant.obtenirDesintegrateur();
+                    System.out.println(JoueurCourant.getNom()+" a recupere un desintegrateur");
+                }
             }
             
         }
     }
     
-    /**public void recupererjeton(){
-        int x = -1;
-        int y = -1;
+    public void recupererJeton(){
+        int x;
+        int y;
         
-        do{
-            x = asknbr("Ligne : ");
-            y = asknbr("Colonne : ");}
-        while(Plateau.recupererjeton(x, y) == null);
+        x = asknbr("Ligne du jeton a recuperer: (De 1 a 6)") - 1;
+        y = asknbr("Colonne du jeton a recuperer: (De 1 a 7)") - 1;
         
-        Jeton jet = Plateau.(x, y);
-        JoueurCourant.ajouterJeton(jet);
+        if (!Plateau.lireCouleurDuJeton(x, y).equals(JoueurCourant.getCouleur()) || !Plateau.presenceJeton(x, y)){
+            System.out.println("Erreur, faute de jeu, il n'y a pas un de vos jetons ici! TOUR ANNULE.");
+        }else{
+            Jeton je = Plateau.recupererJeton(x, y);
+            JoueurCourant.ajouterJeton(je);
+            System.out.println(JoueurCourant.getNom()+" a recupere son jeton!");
+            Plateau.tasserColonne(y);           
+        }
+        
     }
-    */
+    
+    public void jouerDesintegrateur(){
+        int x;
+        int y;
+        
+        x = asknbr("Ligne du jeton a desintegrer : (De 1 a 6)") - 1;
+        y = asknbr("Colonne du jeton a desintegrer: (De 1 a 7)") - 1;
+        
+        if (Plateau.lireCouleurDuJeton(x, y).equals(JoueurCourant.getCouleur()) || !Plateau.presenceJeton(x, y)){
+            System.out.println("Erreur, faute de jeu, on ne peut desintegrer que des jetons adverses! TOUR ANNULE.");
+        }else{
+            Plateau.supprimerJeton(x, y);
+            JoueurCourant.utiliserDesintegrateur();
+            Plateau.tasserColonne(y);
+        }
+    }
 }
