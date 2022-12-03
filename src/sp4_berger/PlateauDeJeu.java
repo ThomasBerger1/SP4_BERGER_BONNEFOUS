@@ -213,6 +213,12 @@ public class PlateauDeJeu {
         }
     }
  
+    public void tasserGrille(){
+        for (int i = 0; i < 7 ;i++){
+            tasserColonne(i);
+        }
+    }
+    
     public void placerTrouNoir(int x, int y){
         grille[x][y].placerTrouNoir();
     }

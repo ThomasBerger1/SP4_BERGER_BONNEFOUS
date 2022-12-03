@@ -28,6 +28,41 @@ public class fenetreDeJeu extends javax.swing.JFrame {
         for (int i = 5; i >= 0; i--) {
             for (int j = 0; j < 7; j++) {
                 CelluleGraphique cellGraph = new CelluleGraphique(Plateau.grille[i][j]);
+
+                cellGraph.addActionListener((java.awt.event.ActionEvent evt) -> {
+                    CelluleDeGrille c = cellGraph.celluleAssociee;
+                    if (!c.presenceJeton()) {
+                        return;
+                    }
+
+                    if (c.lireCouleurDuJeton().equals(JoueurCourant.lireCouleur())) {
+                        message.setText("Le joueur " + JoueurCourant.getNom() + " récupère un de ses jetons.");
+                        Jeton j_recup = c.recupererJeton();
+                        JoueurCourant.ajouterJeton(j_recup);
+                        Plateau.tasserGrille();
+                        panneau_grille.repaint();
+                        joueurSuivant();
+
+                    } else {
+                        if (JoueurCourant.getNombreDesintegrateur() > 0) {
+                            message.setText("Le joueur " + JoueurCourant.getNom() + " désintègre un jeton adverse.");
+                            c.supprimerJeton();
+                            JoueurCourant.utiliserDesintegrateur();
+                            joueurSuivant();
+                        } else {
+                            message.setText("Le joueur " + JoueurCourant.getNom() + " veut désintégrer un jeton adverse mais n'a pas de désintégrateur!");
+                            return;
+                        }
+                        Plateau.tasserGrille();
+                        panneau_grille.repaint();
+
+                        lbl_j1_desint.setText(listeJoueurs[0].getNombreDesintegrateur() + "");
+                        lbl_j2_desint2.setText(listeJoueurs[1].getNombreDesintegrateur() + "");
+
+                        GagnesTu();
+                    }
+                });
+
                 panneau_grille.add(cellGraph);
             }
         }
@@ -355,8 +390,8 @@ public class fenetreDeJeu extends javax.swing.JFrame {
         GagnesTu();
         return resAction;
     }
-    
-    public void DesactivB(){  
+
+    public void DesactivB() {
         btn_col_0.setEnabled(false);
         btn_col_1.setEnabled(false);
         btn_col_2.setEnabled(false);
@@ -365,26 +400,29 @@ public class fenetreDeJeu extends javax.swing.JFrame {
         btn_col_5.setEnabled(false);
         btn_col_6.setEnabled(false);
     }
-    
-    public void GagnesTu(){
+
+    public void GagnesTu() {
         boolean vJ1 = Plateau.etreGagnantePourCouleur(listeJoueurs[0].lireCouleur());
         boolean vJ2 = Plateau.etreGagnantePourCouleur(listeJoueurs[1].lireCouleur());
-        
-        if (vJ1 && !vJ2){
-            message.setText("Victoire du joueur "+listeJoueurs[0].getNom());
+
+        if (vJ1 && !vJ2) {
+            message.setText("Victoire du joueur " + listeJoueurs[0].getNom());
             DesactivB();
         }
-        if (vJ2 && !vJ1){
-            message.setText("Victoire du joueur "+listeJoueurs[1].getNom());
+        if (vJ2 && !vJ1) {
+            message.setText("Victoire du joueur " + listeJoueurs[1].getNom());
             DesactivB();
         }
-        if (vJ1 && vJ2){
-            if(JoueurCourant == listeJoueurs[0])message.setText("Victoire du joueur "+listeJoueurs[1].getNom()+" (faute de jeu de "+listeJoueurs[0].getNom()+")");
-            else message.setText("Victoire du joueur "+listeJoueurs[0].getNom()+" (faute de jeu de "+listeJoueurs[1].getNom()+")");
+        if (vJ1 && vJ2) {
+            if (JoueurCourant == listeJoueurs[0]) {
+                message.setText("Victoire du joueur " + listeJoueurs[1].getNom() + " (faute de jeu de " + listeJoueurs[0].getNom() + ")");
+            } else {
+                message.setText("Victoire du joueur " + listeJoueurs[0].getNom() + " (faute de jeu de " + listeJoueurs[1].getNom() + ")");
+            }
             DesactivB();
         }
     }
-    
+
     /**
      * @param args the command line arguments
      */
